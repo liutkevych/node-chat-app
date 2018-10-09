@@ -17,14 +17,33 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
     console.log('New user connected');
 
+    socket.emit('newMessage', {
+        from: "Admin",
+        text: "Wellcome to chat",
+        createdAt: new Date().toLocaleString()
+    });
+
+    socket.broadcast.emit('newMessage', {
+        from: 'Admin',
+        text: 'New user joined',
+        createdAt: new Date().toLocaleString()
+    });
+
     socket.on('createMessage', (message) => {
         console.log('createMessage', message);
         io.emit('newMessage', {
             from: message.from,
             text: message.text,
-            createdAt: new Date().getTime()
+            createdAt: new Date().toLocaleString()
         });
-    })
+
+        // // It will show new message to all users eccept owner
+        // socket.broadcast.emit('newMessage', {
+        //     from: message.from,
+        //     text: message.text,
+        //     createdAt: new Date().toLocaleString()
+        // });
+    });
 
     socket.on('disconnect', () => {
         console.log('User is disconnected!');

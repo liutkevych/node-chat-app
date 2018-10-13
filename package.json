@@ -14,6 +14,9 @@
   "author": "Oleksandr Liutkevych",
   "license": "ISC",
   "dependencies": {
+    "@clr/icons": "^0.13.5",
+    "@clr/ui": "^0.13.5",
+    "@webcomponents/custom-elements": "^1.2.1",
     "express": "^4.16.3",
     "socket.io": "^2.1.1"
   },
